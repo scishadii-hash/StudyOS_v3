@@ -1,0 +1,12 @@
+{
+  "name": "StudyOS \u2014 Academic Workspace",
+  "short_name": "StudyOS",
+  "description": "Your academic space",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f6fa",
+  "theme_color": "#10172a",
+  "orientation": "portrait",
+  "icons": []
+}

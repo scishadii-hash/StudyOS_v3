@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10172a">
+<meta name="description" content="StudyOS — your academic space">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="styles.css">
+<title>StudyOS — Academic Workspace</title>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand" href="#" aria-label="StudyOS home"><span class="brand-mark">S</span><span><b>StudyOS</b><small>ACADEMIC WORKSPACE</small></span></a>
+    <div class="side-label" data-i18n="workspace">WORKSPACE</div>
+    <nav class="side-nav">
+      <button class="nav-item active" data-page="dashboard"><span>⌂</span><em data-i18n="overview">Overview</em></button>
+      <button class="nav-item" data-page="planner"><span>▦</span><em data-i18n="planner">Planner</em></button>
+      <button class="nav-item" data-page="courses"><span>▤</span><em data-i18n="courses">My Courses</em><i id="courseCount">0</i></button>
+      <button class="nav-item" data-page="lectures"><span>◷</span><em data-i18n="lectures">Lectures</em></button>
+    </nav>
+    <div class="side-label second" data-i18n="manage">MANAGE</div>
+    <nav class="side-nav">
+      <button class="nav-item" data-page="backup"><span>⇅</span><em data-i18n="backup">Backup & Restore</em></button>
+      <button class="nav-item" data-page="settings"><span>⚙</span><em data-i18n="settings">Settings</em></button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="offline-indicator"><span class="pulse"></span><span data-i18n="localMode">Local-first mode</span><b data-i18n="onDevice">ON DEVICE</b></div>
+      <div class="user-chip"><div class="avatar">ST</div><div><b data-i18n="student">Student</b><small data-i18n="university">University workspace</small></div><span class="more">···</span></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="mobile-brand"><span class="brand-mark">S</span><b>StudyOS</b></div>
+      <div class="breadcrumb"><span data-i18n="workspace">WORKSPACE</span><strong>/</strong><b id="pageCrumb">Overview</b></div>
+      <div class="top-actions">
+        <div class="storage-pill"><span class="green-dot"></span><span data-i18n="savedLocally">Saved locally</span></div>
+        <button class="icon-button" id="langToggle" title="Switch language">ع</button>
+        <button class="icon-button" id="themeToggle" title="Toggle theme">☾</button>
+      </div>
+    </header>
+
+    <section class="page active" id="page-dashboard">
+      <div class="welcome-row"><div><div class="eyebrow" id="todayLabel">YOUR ACADEMIC SPACE</div><h1><span data-i18n="welcome">Welcome back</span><span class="wave">✦</span></h1><p data-i18n="welcomeSub">A clearer plan. A calmer semester. One step at a time.</p></div><button class="button primary" data-action="add-course"><span>＋</span><span data-i18n="addCourse">Add course</span></button></div>
+      <div class="hero-card"><div class="hero-copy"><div class="hero-kicker"><span class="spark">✦</span><span data-i18n="semesterOverview">SEMESTER OVERVIEW</span></div><h2 data-i18n="heroTitle">Make your semester<br>count.</h2><p data-i18n="heroSub">Keep your courses, lectures and academic life in one focused space.</p><button class="hero-button" data-page="courses"><span data-i18n="exploreCourses">Explore courses</span><span>↗</span></button></div><div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div><div class="hero-graphic"><div class="glass-card card-a"><span>✳</span><b>01</b><small>FOCUS</small></div><div class="glass-card card-b"><span>▤</span><b>02</b><small>LEARN</small></div><div class="hero-core">S<span>✦</span></div></div></div>
+      <div class="metrics">
+        <article class="metric-card"><div class="metric-icon violet">▤</div><div class="metric-label" data-i18n="totalCourses">TOTAL COURSES</div><strong id="metricCourses">0</strong><small data-i18n="thisSemester">In this semester</small></article>
+        <article class="metric-card"><div class="metric-icon mint">◷</div><div class="metric-label" data-i18n="scheduledLectures">SCHEDULED LECTURES</div><strong id="metricLectures">0</strong><small data-i18n="acrossYourCourses">Across your courses</small></article>
+        <article class="metric-card"><div class="metric-icon amber">✓</div><div class="metric-label" data-i18n="dataStatus">YOUR DATA</div><strong class="status-word" data-i18n="protected">Protected</strong><small data-i18n="storedOnDevice">Stored on this device</small></article>
+      </div>
+      <div class="content-grid">
+        <section class="surface"><div class="section-heading"><div><div class="eyebrow" data-i18n="yourCourses">YOUR COURSES</div><h3 data-i18n="courseOverview">Course overview</h3></div><button class="text-button" data-page="courses"><span data-i18n="viewAll">View all</span> ↗</button></div><div id="dashboardCourses" class="mini-course-list"></div></section>
+        <section class="surface"><div class="section-heading"><div><div class="eyebrow" data-i18n="upNext">UP NEXT</div><h3 data-i18n="upcomingLectures">Upcoming lectures</h3></div><button class="text-button" data-page="lectures"><span data-i18n="viewSchedule">View schedule</span> ↗</button></div><div id="dashboardLectures" class="upcoming-list"></div></section>
+      </div>
+    </section>
+
+    <section class="page" id="page-courses">
+      <div class="page-heading"><div><div class="eyebrow" data-i18n="academicLibrary">ACADEMIC LIBRARY</div><h1 data-i18n="myCourses">My courses</h1><p data-i18n="coursesSub">Manage your subjects, instructors and credit hours.</p></div><button class="button primary" data-action="add-course">＋ <span data-i18n="newCourse">New course</span></button></div>
+      <div class="toolbar"><div class="search-box"><span>⌕</span><input id="courseSearch" data-placeholder="searchCourses" placeholder="Search courses..."></div><span class="result-count" id="courseResultCount">0 courses</span></div>
+      <div id="courseGrid" class="course-grid"></div>
+    </section>
+
+    <section class="page" id="page-lectures">
+      <div class="page-heading"><div><div class="eyebrow" data-i18n="yourTimetable">YOUR TIMETABLE</div><h1 data-i18n="lecturesTitle">Lectures</h1><p data-i18n="lecturesSub">Build a clear view of your weekly academic schedule.</p></div><button class="button primary" data-action="add-lecture">＋ <span data-i18n="addLecture">Add lecture</span></button></div>
+      <div class="toolbar"><div class="filter-select"><select id="lectureFilter"><option value="all">All courses</option></select></div><span class="result-count" id="lectureResultCount">0 lectures</span></div>
+      <div id="lectureList" class="lecture-list"></div>
+    </section>
+
+    <section class="page" id="page-planner">
+      <div class="page-heading"><div><div class="eyebrow" data-i18n="planAhead">PLAN AHEAD</div><h1 data-i18n="plannerTitle">Weekly planner</h1><p data-i18n="plannerSub">Your lectures, organized into one simple view.</p></div><button class="button primary" data-action="add-lecture">＋ <span data-i18n="addToSchedule">Add to schedule</span></button></div>
+      <div class="surface planner-surface"><div class="section-heading"><div><div class="eyebrow" data-i18n="weekAtGlance">WEEK AT A GLANCE</div><h3 id="weekTitle">Your schedule</h3></div><span class="soft-badge" data-i18n="localSchedule">LOCAL SCHEDULE</span></div><div id="weeklyGrid" class="weekly-grid"></div></div>
+    </section>
+
+    <section class="page" id="page-backup">
+      <div class="page-heading"><div><div class="eyebrow" data-i18n="dataManagement">DATA MANAGEMENT</div><h1 data-i18n="backupTitle">Backup & restore</h1><p data-i18n="backupSub">Your academic data belongs to you. Export it or restore it anytime.</p></div></div>
+      <div class="backup-grid"><article class="backup-card"><div class="backup-icon violet">⇧</div><div class="eyebrow" data-i18n="createBackup">CREATE A BACKUP</div><h3 data-i18n="exportYourData">Export your data</h3><p data-i18n="exportSub">Download a JSON file containing your courses, lectures and settings.</p><button class="button primary full" id="exportBtn" data-i18n="downloadBackup">Download backup</button></article><article class="backup-card"><div class="backup-icon mint">⇩</div><div class="eyebrow" data-i18n="restoreBackup">RESTORE A BACKUP</div><h3 data-i18n="bringDataBack">Bring your data back</h3><p data-i18n="restoreSub">Restore a previously exported StudyOS backup from your device.</p><label class="button secondary full file-button" for="importFile" data-i18n="chooseBackup">Choose backup file</label><input type="file" id="importFile" accept="application/json,.json" hidden></article></div>
+      <div class="surface data-summary"><div class="section-heading"><div><div class="eyebrow" data-i18n="yourLocalData">YOUR LOCAL DATA</div><h3 data-i18n="storageSummary">Storage summary</h3></div><span class="soft-badge" data-i18n="indexedDb">INDEXEDDB</span></div><div class="summary-stats"><div><strong id="backupCourses">0</strong><span data-i18n="courses">Courses</span></div><div><strong id="backupLectures">0</strong><span data-i18n="lectures">Lectures</span></div><div><strong id="lastBackup">—</strong><span data-i18n="lastBackup">Last backup</span></div></div><p class="helper-note" data-i18n="backupNote">Tip: Keep a copy of your backup somewhere safe. Clearing browser data may remove locally stored information.</p></div>
+    </section>
+
+    <section class="page" id="page-settings">
+      <div class="page-heading"><div><div class="eyebrow" data-i18n="preferences">PREFERENCES</div><h1 data-i18n="settingsTitle">Settings</h1><p data-i18n="settingsSub">Make your workspace feel right for you.</p></div></div>
+      <div class="surface settings-surface"><div class="setting-row"><div><b data-i18n="appearance">Appearance</b><small data-i18n="appearanceSub">Choose light or dark workspace theme.</small></div><button class="button secondary" id="settingsTheme">Switch theme</button></div><div class="setting-row"><div><b data-i18n="language">Language</b><small data-i18n="languageSub">English is the default study language.</small></div><button class="button secondary" id="settingsLang">العربية</button></div><div class="setting-row"><div><b data-i18n="offlineReady">Offline support</b><small data-i18n="offlineSub">The app shell is cached for supported offline use.</small></div><span class="soft-badge" id="offlineStatus">CHECKING</span></div><div class="setting-row"><div><b data-i18n="cloudSync">Cloud sync</b><small data-i18n="cloudSub">Accounts and cloud sync are intentionally deferred.</small></div><span class="soft-badge">LATER</span></div></div>
+      <div class="surface danger-zone"><div><b data-i18n="dangerZone">Danger zone</b><p data-i18n="clearSub">Permanently delete all locally stored StudyOS data.</p></div><button class="button danger" id="clearDataBtn" data-i18n="clearData">Clear local data</button></div>
+    </section>
+  </main>
+</div>
+
+<div class="mobile-nav">
+  <button class="mobile-nav-item active" data-page="dashboard"><span>⌂</span><small data-i18n="home">Home</small></button>
+  <button class="mobile-nav-item" data-page="planner"><span>▦</span><small data-i18n="planner">Planner</small></button>
+  <button class="mobile-nav-item" data-page="courses"><span>▤</span><small data-i18n="courses">Courses</small></button>
+  <button class="mobile-nav-item" data-page="lectures"><span>◷</span><small data-i18n="lectures">Lectures</small></button>
+  <button class="mobile-nav-item" data-page="settings"><span>⚙</span><small data-i18n="settings">Settings</small></button>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head"><div><div class="eyebrow" id="modalEyebrow">ACADEMIC DETAILS</div><h2 id="modalTitle">Add course</h2></div><button class="icon-button" id="closeModal">×</button></div>
+    <form id="entityForm"><div id="formFields" class="form-grid"></div><div class="form-actions"><button type="button" class="button secondary" id="cancelModal">Cancel</button><button type="submit" class="button primary" id="saveEntity">Save</button></div></form>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body></html>
